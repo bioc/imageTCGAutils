@@ -27,7 +27,7 @@ gpdf <- fullgpnames |>
     dplyr::bind_cols(fullpath = fullgpnames) |>
     tibble::as_tibble()
 
-names(gpdf)[1:4] <- c("pipeline", "level", "project", "filename")
+names(gpdf)[1:3] <- c("pipeline", "level", "filename")
 
 gpdf <- dplyr::bind_cols(
     gpdf,
@@ -54,3 +54,8 @@ db <- imageTCGA:::db |>
     )
 
 result <- dplyr::full_join(alldata, db, by = "fnsansext")
+
+## saveRDS(result, "~/test/data_catalog_v0.Rds")
+saveRDS(result, "~/data/cancerdatasci_catalog.Rds")
+
+## readRDS("~/data/cancerdatasci_catalog.Rds")
