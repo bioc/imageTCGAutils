@@ -1,4 +1,5 @@
 library(dplyr)
+library(tibble)
 setwd("/mnt/STORE1/imagetcga/")
 
 fullhovnames <- list.files("hovernet", recursive = TRUE, full.names = TRUE)
@@ -6,9 +7,9 @@ fullhovnames <- list.files("hovernet", recursive = TRUE, full.names = TRUE)
 hovdf <- fullhovnames |>
     strsplit("/", fixed = TRUE) |>
     do.call(rbind.data.frame, args = _) |>
-    dplyr::bind_cols(fullpath = fullhovnames) |>
-    tibble::as_tibble()
-names(hovdf)[1:3] <- c("pipeline", "format", "filename")
+    bind_cols(fullpath = fullhovnames) |>
+    as_tibble() |>
+    rename(pipeline = 1, format = 2, filename = 3)
 
 hovdf <- dplyr::bind_cols(
     hovdf,
@@ -24,10 +25,9 @@ fullgpnames <- list.files("provgigapath", recursive = TRUE, full.names = TRUE)
 gpdf <- fullgpnames |>
     strsplit("/", fixed = TRUE) |>
     do.call(rbind.data.frame, args = _) |>
-    dplyr::bind_cols(fullpath = fullgpnames) |>
-    tibble::as_tibble()
-
-names(gpdf)[1:3] <- c("pipeline", "level", "filename")
+    bind_cols(fullpath = fullgpnames) |>
+    as_tibble() |>
+    rename(pipeline = 1, level = 2, filename = 3)
 
 gpdf <- dplyr::bind_cols(
     gpdf,
