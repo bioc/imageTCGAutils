@@ -27,7 +27,11 @@ gpdf <- fullgpnames |>
     do.call(rbind.data.frame, args = _) |>
     bind_cols(fullpath = fullgpnames) |>
     as_tibble() |>
-    rename(pipeline = 1, level = 2, filename = 3)
+    rename(pipeline = 1, level = 2, filename = 3) |>
+    mutate(
+        format = gsub("\\.gz$", "", filename) |>
+            tools::file_ext()
+    )
 
 gpdf <- dplyr::bind_cols(
     gpdf,
