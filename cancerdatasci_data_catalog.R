@@ -59,7 +59,23 @@ db <- imageTCGA:::db |>
 
 result <- dplyr::full_join(alldata, db, by = "fnsansext")
 
+## version 1
 ## saveRDS(result, "~/test/data_catalog_v0.Rds")
-saveRDS(result, "~/data/cancerdatasci_catalog.Rds")
+## version 2
+## saveRDS(result, "~/data/cancerdatasci_catalog.Rds")
 
-## readRDS("~/data/cancerdatasci_catalog.Rds")
+## latest
+## saveRDS(result, "~/data/cancerdatasci_catalog_full.Rds")
+
+readRDS("~/data/cancerdatasci_catalog_full.Rds")
+
+col_types <-
+    sapply(result, class) |> substr(x=_, 1L, 1L) |> paste(collapse = "")
+col_types <- gsub("n", "d", col_types)
+
+## readr::write_tsv(result, file = "~/data/store_cancerdatasci_catalog.tsv")
+
+readr::read_tsv(
+    file = "~/data/store_cancerdatasci_catalog.tsv",
+    col_types = col_types
+)
