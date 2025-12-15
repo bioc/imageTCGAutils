@@ -79,3 +79,8 @@ readr::read_tsv(
     file = "~/data/store_cancerdatasci_catalog.tsv",
     col_types = col_types
 )
+
+file.copy(
+    from = "~/data/store_cancerdatasci_catalog.tsv",
+    to =  "/mnt/STORE1/imagetcga/"
+)
