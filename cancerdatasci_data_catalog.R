@@ -2,13 +2,18 @@ library(dplyr)
 library(tibble)
 setwd("/mnt/STORE1/imagetcga/")
 
-# separate catalog by technology due to folder permissions ----------------
+# load imageTCGA internal catalog
+db <- imageTCGA:::db |>
+    as_tibble() |>
+    mutate(
+        fnsansext = tools::file_path_sans_ext(File.Name)
+    )
 
 # hovernet catalog --------------------------------------------------------
 
-fullhovnames <- list.files("hovernet", recursive = TRUE, full.names = TRUE)
+fullhovnames <- list.files("hovernet", full.names = TRUE, recursive = TRUE)
 
-hovdf <- fullhovnames |>
+hov_cat <- fullhovnames |>
     strsplit("/", fixed = TRUE) |>
     do.call(rbind.data.frame, args = _) |>
     bind_cols(fullpath = fullhovnames) |>
@@ -26,18 +31,13 @@ hovdf <- fullhovnames |>
             character(1L),
             1L
         )
-    )
-
-db <- imageTCGA:::db |>
-    as_tibble() |>
-    mutate(
-        fnsansext = tools::file_path_sans_ext(File.Name)
-    )
-
-hov_cat <- dplyr::left_join(hovdf, db, by = "fnsansext")
+    ) |>
+    dplyr::left_join(db, by = "fnsansext")
 
 hov_cat |>
     readr::write_tsv(file = "~/data/hovernet_catalog.tsv")
+
+# finalize and copy -------------------------------------------------------
 
 col_types <-
     sapply(hov_cat, class) |> substr(x = _, 1L, 1L) |> paste(collapse = "")
@@ -45,17 +45,11 @@ col_types <- gsub("n", "d", col_types)
 
 readr::read_tsv("~/data/hovernet_catalog.tsv", col_types = col_types)
 
-file.copy(
-    from = "~/data/hovernet_catalog.tsv",
-    to =  "/mnt/STORE1/imagetcga/hovernet/",
-    overwrite = TRUE
-)
-
 # provgigapath catalog ----------------------------------------------------
 
-fullgpnames <- list.files("provgigapath", recursive = TRUE, full.names = TRUE)
+fullgpnames <- list.files("provgigapath", full.names = TRUE, recursive = TRUE)
 
-gpdf <- fullgpnames |>
+prov_cat <- fullgpnames |>
     strsplit("/", fixed = TRUE) |>
     do.call(rbind.data.frame, args = _) |>
     bind_cols(fullpath = fullgpnames) |>
@@ -75,9 +69,13 @@ gpdf <- fullgpnames |>
             character(1L),
             1L
         )
-    )
+    ) |>
+    dplyr::left_join(db, by = "fnsansext")
 
-prov_cat <- dplyr::left_join(gpdf, db, by = "fnsansext")
+prov_cat |>
+    readr::write_tsv(file = "~/data/provgigapath_catalog.tsv")
+
+# provgigapath catalog ----------------------------------------------------
 
 prov_cat |>
     readr::write_tsv(file = "~/data/provgigapath_catalog.tsv")
@@ -88,10 +86,23 @@ col_types <- gsub("n", "d", col_types)
 
 readr::read_tsv("~/data/provgigapath_catalog.tsv", col_types = col_types)
 
-file.copy(
-    from = "~/data/provgigapath_catalog.tsv",
-    to =  "/mnt/STORE1/imagetcga/provgigapath/",
-    overwrite = TRUE
+
+# join both catalogs ------------------------------------------------------
+
+full_cat <- dplyr::full_join(hov_cat, prov_cat)
+
+col_types <-
+    sapply(full_cat, class) |> substr(x=_, 1L, 1L) |> paste(collapse = "")
+col_types <- gsub("n", "d", col_types)
+
+full_cat |>
+    readr::write_tsv(
+        file = "~/data/store_cancerdatasci_catalog.tsv"
+    )
+
+readr::read_tsv(
+    file = "~/data/store_cancerdatasci_catalog.tsv",
+    col_types = col_types
 )
 
 # previous joined catalog -------------------------------------------------
@@ -105,15 +116,3 @@ file.copy(
 ## saveRDS(result, "~/data/cancerdatasci_catalog_full.Rds")
 
 ## readRDS("~/data/cancerdatasci_catalog_full.Rds")
-
-## col_types <-
-##     sapply(result, class) |> substr(x=_, 1L, 1L) |> paste(collapse = "")
-## col_types <- gsub("n", "d", col_types)
-
-## readr::write_tsv(result, file = "~/data/store_cancerdatasci_catalog.tsv")
-
-## readr::read_tsv(
-##     file = "~/data/store_cancerdatasci_catalog.tsv",
-##     col_types = col_types
-## )
-
