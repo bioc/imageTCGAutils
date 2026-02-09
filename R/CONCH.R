@@ -11,7 +11,7 @@
 #' @param patch_size `numeric(1)` The width/height of the patch in pixels
 #'   (default 224). Used to set the spatial metadata.
 #'
-#' @importFrom S4Vectors metadata<-
+#' @importFrom S4Vectors metadata metadata<-
 #' @importFrom BiocBaseUtils checkInstalled
 #'
 #' @return A `SpatialFeatureExperiment` class object.
