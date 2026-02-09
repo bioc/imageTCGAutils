@@ -26,7 +26,8 @@ Suggests:
     BiocStyle,
     knitr,
     rhdf5,
-    rmarkdown
+    rmarkdown,
+    SpatialFeatureExperiment
 biocViews: Software, WorkflowStep, Preprocessing
 License: Artistic-2.0
 BugReports: https://github.com/waldronlab/imageTCGAutils/issues
