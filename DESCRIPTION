@@ -36,7 +36,8 @@ Suggests:
     knitr,
     rhdf5,
     rmarkdown,
-    SpatialFeatureExperiment
+    SpatialFeatureExperiment,
+    tinytest
 biocViews: Software, WorkflowStep, Preprocessing
 License: Artistic-2.0
 BugReports: https://github.com/waldronlab/imageTCGAutils/issues
