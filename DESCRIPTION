@@ -3,10 +3,17 @@ Title: Utility functions for working with histopatholgy images
 Version: 0.99.2
 Authors@R: c(
     person("Marcel", "Ramos", , "marcel.ramos@sph.cuny.edu",
-    c("aut", "cre"), c(ORCID = "")),
-    person("Ilaria", "Billato", role = c("aut", "ctb")),
-    person("Eslam", "Ambrousamra", role = "ctb")
-    )
+        "aut", c(ORCID = "0000-0002-3242-0582", affiliation = 
+            "CUNY Graduate School of Public Health and Health Policy,
+            New York, NY USA")),
+    person("Ilaria", "Billato", , "ilaria.billato@phd.unipd.it",
+        c("aut", "cre"), c(ORCID = "0000-0002-3335-3254", 
+        affiliation = "Department of Biology, University of Padova")
+    ),
+    person("Eslam", "Abousamra", role = "ctb", comment = c(
+        affiliation = "CUNY Graduate School of Public Health and Health Policy,
+        New York, NY USA")
+    ))
 Description: Utility functions for working with CONCH data, listing remote
     files. One function assigns HoverNet nuclei to ProvGigaPath tiles with
     a scale factor to align coordinates. The funcitions in this package
