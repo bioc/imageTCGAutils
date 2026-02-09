@@ -1,0 +1,38 @@
+Package: imageTCGAutils
+Title: Utility functions for working with histopatholgy images
+Version: 0.99.0
+Authors@R: c(
+    person("Marcel", "Ramos", , "marcel.ramos@sph.cuny.edu",
+    c("aut", "cre"), c(ORCID = "")),
+    person("Ilaria", "Billato", role = c("aut", "ctb")),
+    person("Eslam", "Ambrousamra", role = "ctb")
+    )
+Description: Utility functions for working with CONCH data, listing remote
+    files. One function assigns HoverNet nuclei to ProvGigaPath tiles with
+    a scale factor to align coordinates. The funcitions in this package
+    are not meant for end users.
+Imports:
+    BiocBaseUtils,
+    data.table,
+    dplyr,
+    grDevices,
+    httr2,
+    methods,
+    rvest,
+    S4Vectors,
+    SpatialExperiment,
+    SummarizedExperiment
+Suggests:
+    BiocStyle,
+    knitr,
+    rhdf5,
+    rmarkdown
+biocViews: Software, WorkflowStep, Preprocessing
+License: Artistic-2.0
+BugReports: https://github.com/waldronlab/imageTCGAutils/issues
+URL: https://github.com/waldronlab/imageTCGAutils
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr
+
