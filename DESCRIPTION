@@ -11,6 +11,8 @@ Description: Utility functions for working with CONCH data, listing remote
     files. One function assigns HoverNet nuclei to ProvGigaPath tiles with
     a scale factor to align coordinates. The funcitions in this package
     are not meant for end users.
+Depends:
+    R (>= 4.6.0)
 Imports:
     BiocBaseUtils,
     data.table,
