@@ -52,6 +52,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom methods is
 #' @importFrom grDevices rgb
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
@@ -138,8 +139,8 @@ matchHoverNetToTiles <- function(
     # Step 2: Scale nuclei coordinates
     cell_meta_scaled <- cell_meta |>
         dplyr::mutate(
-            x = x / scale_factor,
-            y = y / scale_factor
+            x = .data$x / scale_factor,
+            y = .data$y / scale_factor
         )
 
     # Step 3: Prepare tiles and nuclei data.tables

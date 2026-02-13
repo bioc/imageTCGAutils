@@ -27,6 +27,7 @@ Imports:
     grDevices,
     httr2,
     methods,
+    rlang,
     rvest,
     S4Vectors,
     SpatialExperiment,
