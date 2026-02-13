@@ -1,3 +1,5 @@
+utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
+
 #' Match HoverNet Nuclei to ProvGigaPath Tiles
 #'
 #' @description Assigns HoverNet nuclei to ProvGigaPath tiles by computing a
