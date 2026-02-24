@@ -16,6 +16,13 @@
 #'
 #' @return A `SpatialFeatureExperiment` class object.
 #'
+#' @examples
+#' conch_file <- system.file(
+#'     "extdata/mini_tcga_conch.h5",
+#'     package = "imageTCGAutils",
+#'     mustWork = TRUE
+#' )
+#' CONCH(conch_file)
 #' @export
 CONCH <- function(file_path, patch_size = 224) {
     checkInstalled("rhdf5")

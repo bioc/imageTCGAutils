@@ -23,3 +23,11 @@ analysis and visualization. The function extracts spatial coordinates and
 feature embeddings from the file, ensuring proper formatting for the SFE
 class.
 }
+\examples{
+conch_file <- system.file(
+    "extdata/mini_tcga_conch.h5",
+    package = "imageTCGAutils",
+    mustWork = TRUE
+)
+CONCH(conch_file)
+}
