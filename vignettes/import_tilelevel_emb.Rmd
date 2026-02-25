@@ -8,9 +8,9 @@ output:
     number_sections: true
     toc_float: true
     toc_depth: 3
-package: imageFeatureTCGA
+package: imageTCGAutils
 vignette: >
-  %\VignetteIndexEntry{imageFeatureTCGA}
+  %\VignetteIndexEntry{imageTCGAutils}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
