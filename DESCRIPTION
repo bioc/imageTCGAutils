@@ -39,6 +39,8 @@ Suggests:
     knitr,
     rhdf5,
     rmarkdown,
+    sfdep,
+    spdep,
     SpatialFeatureExperiment,
     tinytest
 biocViews: Software, WorkflowStep, Preprocessing
