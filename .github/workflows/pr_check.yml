@@ -47,7 +47,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          BiocManager::install(c("covr", "BiocCheck"))
+          BiocManager::install(c("covr", "BiocCheck", "waldronlab/imageFeatureTCGA"))
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
