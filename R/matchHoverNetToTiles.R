@@ -36,7 +36,7 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #'   }
 #'
 #' @details The function performs the following steps:
-#'   1. Computes a scale factor to align nuclei coordinates with 
+#'   1. Computes a scale factor to align nuclei coordinates with
 #'   tile coordinates
 #'   2. Scales nuclei coordinates using the computed scale factor
 #'   3. Creates bounding boxes for each tile based on tile_size
@@ -56,8 +56,14 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #' @importFrom grDevices rgb
 #' @importFrom rlang .data
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
+#' library(imageFeatureTCGA)
+#' hov_file <- paste0(
+#'     "https://store.cancerdatasci.org/hovernet/h5ad/",
+#'     "TCGA-23-1021-01Z-00-DX1.F07C221B-D401-47A5-9519-10DE59CA1E9D.h5ad.gz"
+#' )
+#' hn_spe <- HoverNet(hov_file, outClass = "SpatialExperiment") |>
+#'     import()
 #' # Basic usage with h5ad HoverNet data
 #' result <- matchHoverNetToTiles(hn_spe, pca_tiles)
 #'
@@ -74,8 +80,6 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #'   tile_x = "x_coord",
 #'   tile_y = "y_coord"
 #' )
-#' }
-#'
 #' @export
 matchHoverNetToTiles <- function(
     hovernet,

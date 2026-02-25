@@ -77,7 +77,7 @@ The scale factor is computed as the mean of x and y scale factors, where
 each is the ratio of coordinate ranges between nuclei and tiles.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Basic usage with h5ad HoverNet data
 result <- matchHoverNetToTiles(hn_spe, pca_tiles)
 
@@ -94,6 +94,5 @@ result <- matchHoverNetToTiles(
   tile_x = "x_coord",
   tile_y = "y_coord"
 )
-}
-
+\dontshow{\}) # examplesIf}
 }
