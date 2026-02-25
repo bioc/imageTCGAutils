@@ -33,6 +33,7 @@ Imports:
     SpatialExperiment,
     SummarizedExperiment
 Suggests:
+    anndataR,
     BiocStyle,
     imageFeatureTCGA,
     ggplot2,
