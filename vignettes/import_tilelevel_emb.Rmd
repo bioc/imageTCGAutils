@@ -15,6 +15,24 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# imageTCGAutils
+
+# Introduction
+
+In this vignette, we demonstrate how to work with tile-level embeddings derived
+from whole-slide images (WSIs). Each tile corresponds to a patch of the tissue,
+and its embedding is a high-dimensional vector capturing visual and
+morphological features extracted from Prov-GigaPath.
+
+We begin by importing the tile-level data using imageFeatureTCGA. Next, we
+perform principal component analysis (PCA) to reduce the high-dimensional
+embeddings to two principal components, which facilitates visualization and
+preliminary exploration of the data. We then visualize the spatial layout of the
+tiles on the tissue slide, coloring by the principal components to examine
+patterns in the embedding space.
+
+# Loading packages
+
 ```{r library import, message=FALSE}
 library(BiocStyle)
 library(imageFeatureTCGA)
@@ -27,30 +45,9 @@ library(SpatialExperiment)
 library(data.table)
 ```
 
-
-# Introduction
-
-In this vignette, we demonstrate how to work with tile-level embeddings derived 
-from whole-slide images (WSIs). 
-Each tile corresponds to a patch of the tissue, and its embedding is a
-high-dimensional vector capturing visual and morphological features 
-extracted from Prov-GigaPath.
-
-
-We begin by importing the tile-level data using imageFeatureTCGA. 
-Next, we perform principal component analysis (PCA) to reduce 
-the high-dimensional embeddings to two principal components, 
-which facilitates visualization and preliminary exploration of the data. 
-We then visualize the spatial layout of the tiles on the tissue slide, 
-coloring by the principal components to examine patterns in the embedding space.
-
-
-# Import Prov-GigaPath tile level embeddings. 
+# Import Prov-GigaPath tile level embeddings
 
 ```{r import tile-level emb, results = 'hide'}
-# list slides
-all_tile_files <- listProvGiga( level = "tile_level")[["Filename"]]
-
 ## filter with catalog
 getCatalog("provgigapath") |> 
     dplyr::filter(Project.ID == "TCGA-OV") |> 
@@ -64,12 +61,11 @@ tile_prov_url <- paste0(
 
 example_slide <- ProvGiga(tile_prov_url) |>
     import()
-
 ```
 
 # Embedding PCA
-```{r run PCA}
 
+```{r run PCA}
 # Extract embedding numbers for pca
 embedding_cols <- grep("^[0-9]+$", names(example_slide), value = TRUE)
 
@@ -80,7 +76,6 @@ pca_example_slide <- bind_cols(
     example_slide,
     as_tibble(pca_res$x)[, 1:2] |> rename(PC1 = "PC1", PC2 = "PC2")
 )
-
 ```
 
 
@@ -113,7 +108,6 @@ We construct a k-nearest neighbor graph to define which tiles are spatially
 coords <- pca_example_slide[, c("tile_x", "tile_y")]
 nb <- knn2nb(knearneigh(coords, k = 6))
 lw <- nb2listw(nb, style = "W")
-
 ```
 
 
@@ -129,8 +123,8 @@ lisa <- localmoran(pca_example_slide$PC1, lw)
 pca_example_slide$localI <- lisa[, "Ii"]
 pca_example_slide$localI_pval <- lisa[, "Pr(z != E(Ii))"]
 
-print(mi)
-print(gc)
+mi
+gc
 ```
 
 We visualize the spatial patterns. The Moran scatterplot shows the relationship 
@@ -152,8 +146,6 @@ ggplot(df_lisa, aes(x = tile_x, y = tile_y, color = Ii)) +
     ggtitle("Local Moran's I (LISA) for PC1")
 ```
 
-
-
 # Adding HoverNet Nuclei Features
 
 You can import HoVerNet segmentation results as a
@@ -161,7 +153,6 @@ You can import HoVerNet segmentation results as a
 
 In this section we want show you hoe to integrate HoVerNet classification and 
 segmentation output with Prov-GigaPath embeddings.
-
 
 ```{r importHover}
 # import HoVerNet
@@ -181,8 +172,6 @@ tile_prov_url <- paste0(
 
 pg_spe<- ProvGiga(tile_prov_url) |>
     import()
-
-
 ```
 
 
@@ -211,14 +200,12 @@ points(pca_example_slide$tile_x,
 
 
 # Scale factor between nuclei coordinates and tile coordinates
+
 ```{r compute scaling factor}
 match_hv_pg <- matchHoverNetToTiles(hn_spe, pg_spe)
-
 ```
 
-
 ```{r visualizing tile level with hovernet}
-
 ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y, 
                                     color = cell_type_label, 
                                     size = N)) +
@@ -227,23 +214,16 @@ ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y,
     theme_minimal() +
     labs(title = "All HoverNet cell types per tile")
 
-
 ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y, 
                                     color = dominant_cell_type)) +
     geom_point(size = 2) +
     coord_equal() +
     theme_minimal() +
     labs(title = "Per-tile dominant HoverNet cell type")
-
-
 ```
-
 
 # Session Info
 
 ```{r sessioninfo}
 sessionInfo()
 ```
-
-
-

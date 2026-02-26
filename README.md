@@ -1,15 +1,5 @@
 
-``` r
-library(BiocStyle)
-library(imageFeatureTCGA)
-library(imageTCGAutils)
-library(ggplot2)
-library(dplyr)
-library(sfdep)
-library(spdep)
-library(SpatialExperiment)
-library(data.table)
-```
+# imageTCGAutils
 
 # Introduction
 
@@ -26,13 +16,23 @@ then visualize the spatial layout of the tiles on the tissue slide,
 coloring by the principal components to examine patterns in the
 embedding space.
 
-# Import Prov-GigaPath tile level embeddings.
+# Loading packages
 
 ``` r
-# list slides
-all_tile_files <- listProvGiga( level = "tile_level")[["Filename"]]
-#> Total pages fetched: 26
+library(BiocStyle)
+library(imageFeatureTCGA)
+library(imageTCGAutils)
+library(ggplot2)
+library(dplyr)
+library(sfdep)
+library(spdep)
+library(SpatialExperiment)
+library(data.table)
+```
 
+# Import Prov-GigaPath tile level embeddings
+
+``` r
 ## filter with catalog
 getCatalog("provgigapath") |> 
     dplyr::filter(Project.ID == "TCGA-OV") |> 
@@ -51,7 +51,6 @@ example_slide <- ProvGiga(tile_prov_url) |>
 # Embedding PCA
 
 ``` r
-
 # Extract embedding numbers for pca
 embedding_cols <- grep("^[0-9]+$", names(example_slide), value = TRUE)
 
@@ -113,7 +112,7 @@ lisa <- localmoran(pca_example_slide$PC1, lw)
 pca_example_slide$localI <- lisa[, "Ii"]
 pca_example_slide$localI_pval <- lisa[, "Pr(z != E(Ii))"]
 
-print(mi)
+mi
 #> 
 #>  Moran I test under randomisation
 #> 
@@ -125,7 +124,7 @@ print(mi)
 #> sample estimates:
 #> Moran I statistic       Expectation          Variance 
 #>      6.134724e-01     -2.347418e-04      7.347018e-05
-print(gc)
+gc
 #> 
 #>  Geary C test under randomisation
 #> 
@@ -225,7 +224,6 @@ match_hv_pg <- matchHoverNetToTiles(hn_spe, pg_spe)
 ```
 
 ``` r
-
 ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y, 
                                     color = cell_type_label, 
                                     size = N)) +
@@ -240,7 +238,6 @@ ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y,
 <img src="/home/mramos/gh/imageTCGAutils/README_files/figure-gfm/visualizing tile level with hovernet-1.png" alt="" width="100%" />
 
 ``` r
-
 
 ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y, 
                                     color = dominant_cell_type)) +
