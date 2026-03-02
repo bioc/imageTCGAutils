@@ -64,22 +64,22 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #' )
 #' hn_spe <- HoverNet(hov_file, outClass = "SpatialExperiment") |>
 #'     import()
-#' # Basic usage with h5ad HoverNet data
-#' result <- matchHoverNetToTiles(hn_spe, pca_tiles)
+#'
+# Import Prov-GigaPath tile-level embeddings for the same slide
+#' tile_prov_url <- paste0(
+#'     "https://store.cancerdatasci.org/provgigapath/tile_level/",
+#'     "TCGA-23-1021-01Z-00-DX1.F07C221B-D401-47A5-9519-10DE59CA1E9D.csv.gz"
+#' )
+#' pg_spe <- ProvGiga(tile_prov_url) |> import()
+#'
+#' # Match HoverNet nuclei coordinates to Prov-GigaPath tiles
+#' result <- matchHoverNetToTiles(hn_spe, pg_spe)
 #'
 #' # Access results
 #' tiles_matched <- result$tiles_with_nuclei
 #' dominant_types <- result$tiles_dominant
 #' scale_info <- result$scale_factor
 #'
-#' # Custom parameters
-#' result <- matchHoverNetToTiles(
-#'   hn_spe,
-#'   pca_tiles,
-#'   tile_size = 256,
-#'   tile_x = "x_coord",
-#'   tile_y = "y_coord"
-#' )
 #' @export
 matchHoverNetToTiles <- function(
     hovernet,
