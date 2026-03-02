@@ -65,7 +65,7 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #' hn_spe <- HoverNet(hov_file, outClass = "SpatialExperiment") |>
 #'     import()
 #'
-# Import Prov-GigaPath tile-level embeddings for the same slide
+#' ## Import Prov-GigaPath tile-level embeddings for the same slide
 #' tile_prov_url <- paste0(
 #'     "https://store.cancerdatasci.org/provgigapath/tile_level/",
 #'     "TCGA-23-1021-01Z-00-DX1.F07C221B-D401-47A5-9519-10DE59CA1E9D.csv.gz"
@@ -77,9 +77,11 @@ utils::globalVariables(c(".", "N", "x1", "xmax", "xmin", "y1", "ymax", "ymin"))
 #'
 #' # Access results
 #' tiles_matched <- result$tiles_with_nuclei
+#' tiles_matched
 #' dominant_types <- result$tiles_dominant
+#' head(dominant_types)
 #' scale_info <- result$scale_factor
-#'
+#' scale_info
 #' @export
 matchHoverNetToTiles <- function(
     hovernet,
