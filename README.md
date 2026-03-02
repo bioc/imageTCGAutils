@@ -3,6 +3,15 @@
 
 # Introduction
 
+`imageTCGAutils` provides utility functions for integrating and analyzing
+multi-modal whole-slide image (WSI) data from 
+[The Cancer Genome Atlas (TCGA)](https://cancer.gov/ccg/research/genome-sequencing/tcga).
+It is designed to work alongside `imageFeatureTCGA`, which handles data
+import of precomputed features derived from histopathology
+foundation models, including HoVerNet
+and Prov-GigaPath.
+
+
 In this vignette, we demonstrate how to work with tile-level embeddings
 derived from whole-slide images (WSIs). Each tile corresponds to a patch
 of the tissue, and its embedding is a high-dimensional vector capturing
