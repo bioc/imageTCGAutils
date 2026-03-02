@@ -1,7 +1,7 @@
 ---
-title: "Import Prov-GigaPath tile level embeddings"
-author: "Eslam Abousamra, Ilaria Billato"
-date: "2025-11-13"
+title: "imageTCGAutils"
+author: "Ilaria Billato, Eslam Abousamra"
+date: "2026-03-02"
 output:
   BiocStyle::html_document:
     toc: true
@@ -9,6 +9,7 @@ output:
     toc_float: true
     toc_depth: 3
 package: imageTCGAutils
+bibliography: ../inst/references.bib
 vignette: >
   %\VignetteIndexEntry{imageTCGAutils}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,10 +20,42 @@ vignette: >
 
 # Introduction
 
+`imageTCGAutils` provides utility functions for integrating and analyzing
+multi-modal whole-slide image (WSI) data from TCGA 
+[The Cancer Genome Atlas (TCGA)](https://cancer.gov/ccg/research/genome-sequencing/tcga).
+It is designed to work alongside `imageFeatureTCGA`, which handles data
+import of precomputed features derived from histopathology
+foundation models, including HoVerNet [@graham2019hover]
+and Prov-GigaPath [@xu2024gigapath].
+
+In particular, Prov-GigaPath is a vision encoder pretrained
+on over 1.3 billion pathology image tiles from the Providence Health System,
+producing high-dimensional tile-level embeddings that capture rich visual and
+morphological characteristics of tissue architecture.
+
+`imageTCGAutils` facilitates the integration of these tile-level embeddings 
+with nuclei-level segmentation and classification results generated 
+by HoVerNet.
+Because these data sources operate at different spatial resolutions and use
+distinct coordinate systems, the package provides functions such as
+`matchHoverNetToTiles()` to compute scaling factors and assign nuclei-level
+features to their corresponding
+tiles. This alignment enables downstream
+analyses that combine cellular morphological context from nuclei classification
+with the global representations encoded in tile-level embeddings.
+
+Additionally, the package includes functionality to import into R user-generated
+results obtained from CONCH (CONtrastive learning from Captions for
+Histopathology) [@lu2024visual], a vision–language foundation model pretrained
+on 1.17 million histopathology image–caption pairs. CONCH achieves
+state-of-the-art performance across multiple tasks, including image
+classification, segmentation, and image–text retrieval, thereby enabling
+multi-modal analyses that incorporate both visual and textual information.
+
 In this vignette, we demonstrate how to work with tile-level embeddings derived
-from whole-slide images (WSIs). Each tile corresponds to a patch of the tissue,
-and its embedding is a high-dimensional vector capturing visual and
-morphological features extracted from Prov-GigaPath.
+from whole-slide images (WSIs). Each tile corresponds to a tissue patch,
+and its embedding is a high-dimensional vector summarizing visual and 
+morphological features extracted by Prov-GigaPath.
 
 We begin by importing the tile-level data using imageFeatureTCGA. Next, we
 perform principal component analysis (PCA) to reduce the high-dimensional
@@ -227,3 +260,5 @@ ggplot(match_hv_pg$tiles_with_nuclei, aes(tile_x, tile_y,
 ```{r sessioninfo}
 sessionInfo()
 ```
+
+# References
