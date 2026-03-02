@@ -21,7 +21,7 @@ vignette: >
 # Introduction
 
 `imageTCGAutils` provides utility functions for integrating and analyzing
-multi-modal whole-slide image (WSI) data from TCGA 
+multi-modal whole-slide image (WSI) data from 
 [The Cancer Genome Atlas (TCGA)](https://cancer.gov/ccg/research/genome-sequencing/tcga).
 It is designed to work alongside `imageFeatureTCGA`, which handles data
 import of precomputed features derived from histopathology
