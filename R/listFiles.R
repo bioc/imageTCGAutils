@@ -12,7 +12,7 @@
 #'   functions return a `data.frame` with filenames and file sizes.
 #'
 #' @param format `character(1L)` One of "geojson", "h5ad", "json", or "thumb"
-#'   specifying the desired HoverNet data format. Default is "h5ad".
+#'   specifying the desired HoverNet data format. Default is "geojson".
 #'
 #' @param level `character(1L)` One of "slide_level" or "tile_level" specifying
 #'   the desired ProvGiga data level. Default is "slide_level".

@@ -12,7 +12,7 @@ listProvGiga(level = c("slide_level", "tile_level"), maxkeys = 1000L)
 }
 \arguments{
 \item{format}{\code{character(1L)} One of "geojson", "h5ad", "json", or "thumb"
-specifying the desired HoverNet data format. Default is "h5ad".}
+specifying the desired HoverNet data format. Default is "geojson".}
 
 \item{maxkeys}{\code{integer(1L)} Maximum number of files to return. Default is
 1000.}
