@@ -37,11 +37,8 @@ listHoverNet <- function(
 
     .query_s3_prefix(
         prefix = paste0("hovernet/", format, "/"),
-        maxkeys = maxkeys,
-        access_key = access_key,
-        secret_key = secret_key
+        maxkeys = maxkeys
     )
-
 }
 
 #' @rdname listFiles
@@ -61,13 +58,11 @@ listProvGiga <- function(
 
     .query_s3_prefix(
         prefix = paste0("provgigapath/", level, "/"),
-        maxkeys = maxkeys,
-        access_key = access_key,
-        secret_key = secret_key
+        maxkeys = maxkeys
     )
 }
 
-.query_s3_prefix <- function(prefix, maxkeys, access_key, secret_key) {
+.query_s3_prefix <- function(prefix, maxkeys) {
     s3 <- paws::s3(
         config = list(
             credentials = list(
