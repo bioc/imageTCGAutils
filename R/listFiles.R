@@ -62,6 +62,7 @@ listProvGiga <- function(
     )
 }
 
+#' @importFrom utils head
 .query_s3_prefix <- function(prefix, maxkeys) {
     s3 <- paws::s3(
         config = list(
