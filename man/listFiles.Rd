@@ -6,13 +6,16 @@
 \alias{listProvGiga}
 \title{List available HoVerNet and Prov-Giga-Path data for TCGA cancers}
 \usage{
-listHoverNet(format = c("geojson", "h5ad", "json", "thumb"))
+listHoverNet(format = c("geojson", "h5ad", "json", "thumb"), maxkeys = 1000L)
 
-listProvGiga(level = c("slide_level", "tile_level"))
+listProvGiga(level = c("slide_level", "tile_level"), maxkeys = 1000L)
 }
 \arguments{
 \item{format}{\code{character(1L)} One of "geojson", "h5ad", "json", or "thumb"
 specifying the desired HoverNet data format. Default is "h5ad".}
+
+\item{maxkeys}{\code{integer(1L)} Maximum number of files to return. Default is
+1000.}
 
 \item{level}{\code{character(1L)} One of "slide_level" or "tile_level" specifying
 the desired ProvGiga data level. Default is "slide_level".}
@@ -31,10 +34,10 @@ functions return a \code{data.frame} with filenames and file sizes.
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ## List available HoverNet data for TCGA-OV
-listHoverNet(format = "h5ad")
+listHoverNet(format = "geojson", maxkeys = 10)
 \dontshow{\}) # examplesIf}
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ## List available ProvGiga slide-level data for TCGA-BRCA
-listProvGiga(level = "slide_level")
+listProvGiga(level = "slide_level", maxkeys = 10)
 \dontshow{\}) # examplesIf}
 }

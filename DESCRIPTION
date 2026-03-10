@@ -25,10 +25,8 @@ Imports:
     data.table,
     dplyr,
     grDevices,
-    httr2,
     methods,
     rlang,
-    rvest,
     S4Vectors,
     SpatialExperiment,
     SummarizedExperiment
@@ -38,6 +36,7 @@ Suggests:
     imageFeatureTCGA,
     ggplot2,
     knitr,
+    paws,
     rhdf5,
     rmarkdown,
     sfdep,
