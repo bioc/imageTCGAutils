@@ -5,7 +5,7 @@
 # Test listHoverNet
 result <- listHoverNet()
 expect_inherits(result, "data.frame")
-expect_true(all(c("Filename", "Modified", "Size") %in% names(result)))
+expect_true(all(c("Key", "LastModified", "ETag", "Size") %in% names(result)))
 expect_true(nrow(result) > 0)
 expect_false(any(grepl("^\\.\\.", result[["Filename"]])))
 
@@ -18,4 +18,4 @@ expect_false(any(grepl("^\\.\\.", result[["Filename"]])))
 # Test listProvGiga
 result <- listProvGiga()
 expect_inherits(result, "data.frame")
-expect_true(all(c("Filename", "Modified", "Size") %in% names(result)))
+expect_true(all(c("Key", "LastModified", "ETag", "Size") %in% names(result)))
