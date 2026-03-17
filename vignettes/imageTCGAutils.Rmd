@@ -21,12 +21,14 @@ vignette: >
 # Introduction
 
 `imageTCGAutils` provides utility functions for integrating and analyzing
-multi-modal whole-slide image (WSI) data from 
-[The Cancer Genome Atlas (TCGA)](https://cancer.gov/ccg/research/genome-sequencing/tcga).
+multi-modal whole-slide image (WSI) data from
+[The Cancer Genome Atlas (TCGA)][1].
 It is designed to work alongside `imageFeatureTCGA`, which handles data
 import of precomputed features derived from histopathology
 foundation models, including HoVerNet [@graham2019hover]
 and Prov-GigaPath [@xu2024gigapath].
+
+[1]: https://cancer.gov/ccg/research/genome-sequencing/tcga
 
 In particular, Prov-GigaPath is a vision encoder pretrained
 on over 1.3 billion pathology image tiles from the Providence Health System,
