@@ -16,8 +16,8 @@ Authors@R: c(
     ))
 Description: Utility functions for working with CONCH data, listing remote
     files. One function assigns HoverNet nuclei to ProvGigaPath tiles with
-    a scale factor to align coordinates. The funcitions in this package
-    are not meant for end users.
+    a scale factor to align coordinates. Provides internal utility functions
+    for 'imageFeatureTCGA' and most functions are not meant for end users.
 Depends:
     R (>= 4.5.0)
 Imports:
