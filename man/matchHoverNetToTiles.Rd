@@ -83,25 +83,17 @@ hov_file <- paste0(
     "https://store.cancerdatasci.org/hovernet/h5ad/",
     "TCGA-23-1021-01Z-00-DX1.F07C221B-D401-47A5-9519-10DE59CA1E9D.h5ad.gz"
 )
-hn_spe <- HoverNet(hov_file, outClass = "SpatialExperiment") |>
-    import()
+hn_spe <- HoverNet(hov_file, outClass = "SpatialExperiment") |> import()
 
-## Import Prov-GigaPath tile-level embeddings for the same slide
 tile_prov_url <- paste0(
     "https://store.cancerdatasci.org/provgigapath/tile_level/",
     "TCGA-23-1021-01Z-00-DX1.F07C221B-D401-47A5-9519-10DE59CA1E9D.csv.gz"
 )
 pg_spe <- ProvGiga(tile_prov_url) |> import()
 
-# Match HoverNet nuclei coordinates to Prov-GigaPath tiles
-result <- matchHoverNetToTiles(hn_spe, pg_spe)
-
-# Access results
-tiles_matched <- result$tiles_with_nuclei
-tiles_matched
+result         <- matchHoverNetToTiles(hn_spe, pg_spe)
+tiles_matched  <- result$tiles_with_nuclei
 dominant_types <- result$tiles_dominant
-head(dominant_types)
-scale_info <- result$scale_factor
-scale_info
+scale_info     <- result$scale_factor
 \dontshow{\}) # examplesIf}
 }
