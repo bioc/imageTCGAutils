@@ -66,6 +66,15 @@ preliminary exploration of the data. We then visualize the spatial layout of the
 tiles on the tissue slide, coloring by the principal components to examine
 patterns in the embedding space.
 
+# Installation
+
+```{r install, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("waldronlab/imageTCGAutils")
+```
+
 # Loading packages
 
 ```{r library import, message=FALSE}
