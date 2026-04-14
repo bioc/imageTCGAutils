@@ -24,7 +24,7 @@
 #' )
 #' CONCH(conch_file)
 #' @export
-CONCH <- function(file_path, patch_size = 224) {
+ImportCONCH <- function(file_path, patch_size = 224) {
     checkInstalled("rhdf5")
     # 1. Read Data
     # h5read will read these based on the dimensions in the file

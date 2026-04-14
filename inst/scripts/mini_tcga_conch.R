@@ -22,4 +22,4 @@ h5write(h1, h5new, "/coords")
 h2 <- h5read(h5file, "/features", index = indx)
 h5write(h2, h5new, "/features")
 
-imageTCGAutils::CONCH("inst/extdata/mini_tcga_conch.h5")
+imageTCGAutils::importCONCH("inst/extdata/mini_tcga_conch.h5")
