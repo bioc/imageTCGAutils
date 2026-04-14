@@ -195,7 +195,7 @@ ggplot(df_lisa, aes(x = tile_x, y = tile_y, color = Ii)) +
 You can import HoVerNet segmentation results as a
 `SpatialExperiment` or `SpatialFeatureExperiment`.
 
-In this section we want show you hoe to integrate HoVerNet classification and 
+In this section we want show you how to integrate HoVerNet classification and 
 segmentation output with Prov-GigaPath embeddings.
 
 ```{r importHover}
