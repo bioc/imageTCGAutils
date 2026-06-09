@@ -28,5 +28,5 @@ in_files <- file.path(
 ) |>
     file.exists()
 
-lnames[!in_files] |>
+local[!in_files, "ctime"] |>
     head()
