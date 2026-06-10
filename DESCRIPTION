@@ -42,7 +42,8 @@ Suggests:
     sfdep,
     spdep,
     SpatialFeatureExperiment,
-    tinytest
+    tinytest,
+    wk
 biocViews: Software, WorkflowStep, Preprocessing
 License: Artistic-2.0
 BugReports: https://github.com/waldronlab/imageTCGAutils/issues
