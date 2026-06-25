@@ -14,4 +14,9 @@
 ## copy folders to bucket
 rclone copy /mnt/STORE1/imagetcga/hovernet/json  \
     cf_u24_rw:waldronlab-image-features/hovernet/json \
-    --exclude "*.json" -vv --dry-run 
+    --exclude "*.json" -vv --dry-run
+
+## copy parquet to bucket
+rclone copy /mnt/STORE1/imagetcga/hovernet/parquet \
+    cf_u24_rw:waldronlab-image-features/hovernet/parquet \
+    -vv --dry-run
