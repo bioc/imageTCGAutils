@@ -4,6 +4,8 @@ cloud <- listHoverNet(format = "json", maxkeys = 11000L)
 cloud <- cloud[!duplicated(cloud), ]
 
 jsondir <- "/mnt/STORE1/imagetcga/hovernet/json"
+stopifnot(dir.exists(jsondir))
+
 local <- list.files(
     jsondir, "\\.json\\.gz$", full.names = TRUE
 ) |>
