@@ -1,5 +1,7 @@
 library(dplyr)
 library(tibble)
+library(glue)
+
 setwd("/mnt/STORE1/imagetcga/")
 
 # load imageTCGA internal catalog
@@ -9,9 +11,16 @@ db <- imageTCGA:::db |>
         fnsansext = tools::file_path_sans_ext(File.Name)
     )
 
+catalog_version <- "1.1.1"
+
 # hovernet catalog --------------------------------------------------------
 
 fullhovnames <- list.files("hovernet", full.names = TRUE, recursive = TRUE)
+
+## exclude uncompressed JSON files
+exclude <- !grepl("^hovernet\\/json.*\\.json$", fullhovnames) &
+    !grepl("\\.parquet$", fullhovnames)
+fullhovnames <- fullhovnames[exclude]
 
 hov_cat <- fullhovnames |>
     strsplit("/", fixed = TRUE) |>
@@ -97,22 +106,15 @@ col_types <- gsub("n", "d", col_types)
 
 full_cat |>
     readr::write_tsv(
-        file = "~/data/store_cancerdatasci_catalog.tsv"
+        file = glue(
+            "~/data/imageTCGA_catalog_v{catalog_version}.tsv"
+        )
     )
 
 readr::read_tsv(
-    file = "~/data/store_cancerdatasci_catalog.tsv",
+    file = glue(
+        "~/data/imageTCGA_catalog_v{catalog_version}.tsv"
+    ),
     col_types = col_types
 )
 
-# previous joined catalog -------------------------------------------------
-
-## version 1
-## saveRDS(result, "~/test/data_catalog_v0.Rds")
-## version 2
-## saveRDS(result, "~/data/cancerdatasci_catalog.Rds")
-
-## latest
-## saveRDS(result, "~/data/cancerdatasci_catalog_full.Rds")
-
-## readRDS("~/data/cancerdatasci_catalog_full.Rds")
