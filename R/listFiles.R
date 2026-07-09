@@ -28,7 +28,7 @@
 #' listHoverNet(format = "geojson", maxkeys = 10)
 #' @export
 listHoverNet <- function(
-    format = c("geojson", "h5ad", "json", "thumb"),
+    format = c("geojson", "h5ad", "json", "parquet", "thumb"),
     maxkeys = 1000L
 ) {
     checkInstalled("paws")
