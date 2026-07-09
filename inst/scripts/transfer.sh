@@ -20,3 +20,12 @@ rclone copy /mnt/STORE1/imagetcga/hovernet/json  \
 rclone copy /mnt/STORE1/imagetcga/hovernet/parquet \
     cf_u24_rw:waldronlab-image-features/hovernet/parquet \
     -vv --dry-run
+
+## total size of bucket
+rclone size cf_u24_rw:waldronlab-image-features --json
+
+## ls hovernet
+rclone lsf cf_u24_rw:waldronlab-image-features/hovernet/ --dirs-only
+
+## size of parquet folder
+rclone size cf_u24_rw:waldronlab-image-features/hovernet/parquet/
