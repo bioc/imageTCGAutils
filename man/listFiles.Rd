@@ -6,7 +6,10 @@
 \alias{listProvGiga}
 \title{List available HoVerNet and Prov-Giga-Path data for TCGA cancers}
 \usage{
-listHoverNet(format = c("geojson", "h5ad", "json", "thumb"), maxkeys = 1000L)
+listHoverNet(
+  format = c("geojson", "h5ad", "json", "parquet", "thumb"),
+  maxkeys = 1000L
+)
 
 listProvGiga(level = c("slide_level", "tile_level"), maxkeys = 1000L)
 }
