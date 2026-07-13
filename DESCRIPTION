@@ -50,6 +50,6 @@ BugReports: https://github.com/waldronlab/imageTCGAutils/issues
 URL: https://github.com/waldronlab/imageTCGAutils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Date: 2026-07-09
+Config/roxygen2/version: 8.0.0
